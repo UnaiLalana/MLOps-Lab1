@@ -10,7 +10,6 @@ from mylib import model
 @click.group()
 def cli():
     """CLI for the model operations."""
-    pass
 
 
 @cli.command()
@@ -19,7 +18,7 @@ def predict(image_path):
     """Classify an image located at IMAGE_PATH."""
     try:
         image = model.Image.open(image_path)
-    except Exception as e:
+    except FileNotFoundError as e:
         click.echo(f"Error opening image: {e}")
         return
 
@@ -39,7 +38,7 @@ def resize(image_path, output_path, width, height):
         resized_image = model.resize_image(image, (width, height))
         resized_image.save(output_path)
         click.echo(f"Image saved to {output_path}")
-    except Exception as e:
+    except FileNotFoundError as e:
         click.echo(f"Error processing image: {e}")
 
 
@@ -53,7 +52,7 @@ def grayscale(image_path, output_path):
         grayscale_image = model.convert_to_grayscale(image)
         grayscale_image.save(output_path)
         click.echo(f"Grayscale image saved to {output_path}")
-    except Exception as e:
+    except FileNotFoundError as e:
         click.echo(f"Error processing image: {e}")
 
 
