@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from mylib import model
 
 def test_predict_cat():
-    image = "cat_image"
+    image = model.Image.new('RGB', (100, 100))
     assert model.predict(image) in ["cat", "dog", "bird"]
 
 def test_resize_image():
